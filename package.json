@@ -1,0 +1,21 @@
+{
+  "name": "salon",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Find what you're drawn to — an art discovery site for people who don't know art yet.",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.26.2"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.1",
+    "vite": "^5.4.8"
+  }
+}
