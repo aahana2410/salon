@@ -1,60 +1,56 @@
-import { Link, NavLink, Outlet, useLocation } from "react-router-dom";
 import { useEffect } from "react";
-import { useTaste } from "../state/TasteContext";
+import { Link, NavLink, Outlet, useLocation } from "react-router-dom";
+import PaintedWorld from "./PaintedWorld";
 
-function ScrollToTop() {
+/* Each room stands in front of its own painted world. */
+const WORLD_FOR = {
+  "/": "cosmic",
+  "/quiz": "sunset",
+  "/atelier": "lake",
+};
+
+const worldFor = (pathname) =>
+  WORLD_FOR[pathname] ?? (pathname.startsWith("/work/") ? "ochre" : "cosmic");
+
+export default function Layout() {
   const { pathname } = useLocation();
+
   // Block body on purpose: window.scrollTo() returns null in Chrome, and React
   // would take that non-undefined value for a cleanup function and call it.
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
-  return null;
-}
-
-export default function Layout() {
-  const { saved, hasTaste } = useTaste();
 
   return (
-    <>
-      <ScrollToTop />
-      <a className="skip-link" href="#main">
-        Skip to content
-      </a>
+    <div className="stage">
+      <PaintedWorld name={worldFor(pathname)} />
 
-      <header className="site-header">
-        <div className="page header-inner">
-          <Link to="/" className="wordmark">
-            Salon
+      <div className="sheet">
+        <a className="skip-link" href="#room">
+          skip to content
+        </a>
+
+        <nav className="sheet-nav" aria-label="Main">
+          <span className="nav-links">
+            <NavLink to="/" end>
+              welcome
+            </NavLink>
+            <NavLink to="/atelier">your atelier</NavLink>
+          </span>
+          <Link to="/" className="nav-mark">
+            salon
           </Link>
-          <nav className="site-nav" aria-label="Main">
-            <NavLink to="/gallery">Gallery</NavLink>
-            <NavLink to="/saved">
-              Saved
-              {saved.length > 0 && <span className="count">{saved.length}</span>}
-            </NavLink>
-            <NavLink to="/quiz" className="nav-cta">
-              {hasTaste ? "Retake quiz" : "Take the quiz"}
-            </NavLink>
-          </nav>
-        </div>
-      </header>
+        </nav>
 
-      <main id="main">
-        <Outlet />
-      </main>
+        <main id="room" className="sheet-body">
+          <Outlet />
+        </main>
 
-      <footer className="site-footer">
-        <div className="page footer-inner">
-          <p>
-            <strong>Salon</strong> — find what you're drawn to.
-          </p>
-          <p className="fine-print">
-            A design prototype. The artists, artworks and prices are fictional; every
-            picture is drawn in the browser as SVG.
-          </p>
-        </div>
-      </footer>
-    </>
+        <footer className="sheet-foot">
+          a design prototype — the artists, artworks, prices and gatherings are
+          invented, and nothing you tap here sends a message to anyone.
+        </footer>
+      </div>
+    </div>
   );
 }

@@ -1,5 +1,5 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
-import { QUIZ, TASTE_LABEL, WORKS, getWork } from "../data/works";
+import { QUIZ, WORKS, getWork } from "../data/works";
 
 const TasteContext = createContext(null);
 
@@ -81,7 +81,6 @@ export function TasteProvider({ children }) {
       topTags,
       hasTaste: picksMade > 0,
       quizComplete: picksMade >= QUIZ.length,
-      tasteSentence: topTags.map((t) => TASTE_LABEL[t]).join(" and "),
       matchFor: (id) => ranked.find((w) => w.id === Number(id))?.match,
       recordPick,
       resetTaste,

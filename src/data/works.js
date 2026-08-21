@@ -1,15 +1,15 @@
-/* The collection. Every artwork here is fictional and drawn as inline SVG —
-   `art.kind` picks a renderer in components/Artwork.jsx, `art.colors` feeds it. */
+/* The collection, the quiz, and everything the atelier fills itself with.
+   Every artist, artwork, price and gathering here is invented. */
 
 export const WORKS = [
   {
     id: 1,
+    slug: "dusk",
     title: "Harbor at Dusk",
+    year: 2026,
     artist: "Mireille Okafor",
     price: 1400,
-    medium: "Oil on canvas, 30 × 36 in",
-    tags: ["color", "calm"],
-    art: { kind: "colorField", colors: ["#C96F4A", "#3E4E5E"] },
+    tags: ["#color", "#calm"],
     plain:
       "Two fields of color meet like water and sky. Color-field painting asks you to feel before you think — stand close and the edge between the tones starts to shimmer.",
     priceWhy:
@@ -17,12 +17,12 @@ export const WORKS = [
   },
   {
     id: 2,
+    slug: "fanfare",
     title: "Study for a Fanfare",
+    year: 2025,
     artist: "Tomás Iglesias",
     price: 850,
-    medium: "Acrylic on panel, 18 × 22 in",
-    tags: ["bold", "geometry"],
-    art: { kind: "geometric", colors: ["#D9A521", "#2E4057", "#B14A3A"] },
+    tags: ["#bold", "#geometry"],
     plain:
       "Hard-edged shapes borrowed from Bauhaus design, arranged like a chord. Geometric abstraction is about balance — cover the triangle with your thumb and feel the picture tip over.",
     priceWhy:
@@ -30,12 +30,12 @@ export const WORKS = [
   },
   {
     id: 3,
+    slug: "windDiary",
     title: "Wind Diary III",
+    year: 2026,
     artist: "Hana Sato",
     price: 2100,
-    medium: "Ink and pigment on canvas, 40 × 48 in",
-    tags: ["energy", "gesture"],
-    art: { kind: "gestural", colors: ["#23252B", "#B8862E"] },
+    tags: ["#energy", "#gesture"],
     plain:
       "Each stroke was made in a single breath — gestural abstraction records the artist's movement, so you're really looking at a dance that left a trace.",
     priceWhy:
@@ -43,12 +43,12 @@ export const WORKS = [
   },
   {
     id: 4,
+    slug: "bloom",
     title: "Slow Bloom",
+    year: 2025,
     artist: "Adaeze Nwosu",
     price: 1150,
-    medium: "Oil on linen, 24 × 30 in",
-    tags: ["calm", "organic"],
-    art: { kind: "organic", colors: ["#8A9B6E", "#EFE7D8"] },
+    tags: ["#calm", "#organic"],
     plain:
       "A soft botanical form that never resolves into a specific plant. Biomorphic abstraction borrows nature's shapes without copying them — it reads differently every season you live with it.",
     priceWhy:
@@ -56,12 +56,12 @@ export const WORKS = [
   },
   {
     id: 5,
+    slug: "horizons",
     title: "Nine Horizons",
+    year: 2024,
     artist: "Mireille Okafor",
     price: 980,
-    medium: "Graphite on cotton paper, 22 × 26 in",
-    tags: ["calm", "line"],
-    art: { kind: "linework", colors: ["#3E4E5E"] },
+    tags: ["#calm", "#line"],
     plain:
       "Nine drawn horizons, none quite level. Minimal line work rewards slow looking — the small wobbles are where the hand shows through.",
     priceWhy:
@@ -69,12 +69,12 @@ export const WORKS = [
   },
   {
     id: 6,
+    slug: "signalFire",
     title: "Signal Fire",
+    year: 2026,
     artist: "Tomás Iglesias",
     price: 1600,
-    medium: "Acrylic on canvas, 36 × 42 in",
-    tags: ["bold", "energy"],
-    art: { kind: "geometric", colors: ["#B14A3A", "#23252B", "#D9A521"] },
+    tags: ["#bold", "#energy"],
     plain:
       "The same geometric language as his quieter work, but turned up loud — high-contrast color doing the shouting.",
     priceWhy:
@@ -82,12 +82,12 @@ export const WORKS = [
   },
   {
     id: 7,
+    slug: "estuary",
     title: "Estuary",
+    year: 2025,
     artist: "Hana Sato",
     price: 1250,
-    medium: "Ink and gouache on canvas, 28 × 34 in",
-    tags: ["gesture", "calm"],
-    art: { kind: "gestural", colors: ["#5B7A8C", "#8A9B6E"] },
+    tags: ["#gesture", "#calm"],
     plain:
       "Looser and cooler than her ink pieces — the strokes slow down like a river reaching the sea.",
     priceWhy:
@@ -95,12 +95,12 @@ export const WORKS = [
   },
   {
     id: 8,
+    slug: "nightGarden",
     title: "Night Garden",
+    year: 2026,
     artist: "Adaeze Nwosu",
     price: 1900,
-    medium: "Oil on linen, 44 × 52 in",
-    tags: ["organic", "bold"],
-    art: { kind: "organic", colors: ["#B8862E", "#2E3440"] },
+    tags: ["#organic", "#bold"],
     plain:
       "Her botanical forms moved into darkness — the gold shape floats like something seen by lantern light.",
     priceWhy:
@@ -117,17 +117,63 @@ export const QUIZ = [
   [2, 4],
 ];
 
-/** Plain-language name for each taste tag. */
-export const TASTE_LABEL = {
-  calm: "quiet, contemplative work",
-  bold: "bold color and contrast",
-  gesture: "expressive, gestural mark-making",
-  geometry: "clean geometric form",
-  organic: "soft, organic shapes",
-  line: "minimal line work",
-  color: "rich fields of color",
-  energy: "high-energy compositions",
+/** Short readings, keyed to taste tags. */
+export const LESSONS = {
+  "#calm": {
+    title: "the art of slow looking",
+    body: "quiet works reveal themselves over minutes, not seconds. try standing with one piece for a full minute — most people never do, and it changes everything.",
+  },
+  "#bold": {
+    title: "why loud color works",
+    body: "high-contrast painting borrows tricks from signage and stained glass: your eye can't leave. the best bold works balance the shout with one quiet corner.",
+  },
+  "#gesture": {
+    title: "reading a brushstroke",
+    body: "a gestural mark is a recording of the artist's body — speed, hesitation, breath. you're not looking at a picture of movement; you're looking at movement itself.",
+  },
+  "#geometry": {
+    title: "the comfort of shape",
+    body: "geometric abstraction descends from bauhaus and quilt-making alike. its pleasure is balance: cover one shape with your thumb and feel the picture tip.",
+  },
+  "#organic": {
+    title: "nature without copying",
+    body: "biomorphic forms suggest leaves, cells, bodies — without becoming any of them. that openness is why they read differently every season you live with them.",
+  },
+  "#line": {
+    title: "where the hand shows",
+    body: "in minimal line work, the small wobbles are the point. a ruler could make it perfect; the artist chose not to. imperfection is the signature.",
+  },
+  "#color": {
+    title: "how color carries feeling",
+    body: "color-field painters believed hue alone could move you before thought arrives. notice which colors you keep returning to — that's data about you.",
+  },
+  "#energy": {
+    title: "compositions that vibrate",
+    body: "high-energy works use diagonal lines and clashing hues to keep your eye circling. hang one where you start your day, not where you end it.",
+  },
 };
+
+/** Gatherings, in the spirit of the original salons. */
+export const WORKSHOPS = [
+  {
+    title: "beginner's eye: a gallery walk",
+    where: "lower east side",
+    when: "sat, sep 12 · 11am",
+    note: "two hours, five galleries, zero jargon.",
+  },
+  {
+    title: "watercolor evening with adaeze nwosu",
+    where: "greenpoint studio",
+    when: "thu, sep 24 · 7pm",
+    note: "paint alongside an artist from your feed.",
+  },
+  {
+    title: "how art is priced: open q&a",
+    where: "online",
+    when: "wed, oct 7 · 6pm",
+    note: "ask the awkward questions. we love them.",
+  },
+];
 
 export const getWork = (id) => WORKS.find((w) => w.id === Number(id));
 
